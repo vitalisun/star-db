@@ -1,0 +1,13 @@
+.person-details img {
+    width: 100px;
+    height:130px;
+    border-radius: 10px;
+}
+
+.person-details{
+    font-size: 0.8rem;
+    width: 50%;
+    background-color: #303030;
+    padding-top: 10px;
+    margin:0;
+}
