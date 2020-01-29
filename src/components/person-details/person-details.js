@@ -17,10 +17,10 @@ const PersonDetails = () => {
 
                 <h4>Mustafar</h4>
 
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
+                <ul className="list-group list-group-flush">
+                    <li className="list-group-item">Cras justo odio</li>
+                    <li className="list-group-item">Dapibus ac facilisis in</li>
+                    <li className="list-group-item">Morbi leo risus</li>
                 </ul>
             </div>
 
