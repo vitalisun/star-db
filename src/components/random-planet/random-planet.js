@@ -5,6 +5,7 @@ import './random-planet.css';
 import randomPlanetImg from '../../paris.jpg';
 
 import SwapiService from '../../services/swapi-service';
+import Spinner from '../spinner';
 
 export default class RandomPlanet extends Component {
 
@@ -39,7 +40,7 @@ export default class RandomPlanet extends Component {
 
             <div className='random-planet d-flex'>
 
-                <div class="align-self-start">
+                {/* <div class="align-self-start">
                     <img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />
                 </div>
                 <div class="align-self-end w-50 ml-4">
@@ -59,9 +60,9 @@ export default class RandomPlanet extends Component {
                             <span>{diameter}</span>
                         </li>
                     </ul>
-                </div>
+                </div> */}
 
-
+<Spinner/>
 
             </div>
         );
