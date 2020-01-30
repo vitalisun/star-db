@@ -6,6 +6,7 @@ import randomPlanetImg from '../../paris.jpg';
 
 import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
+import ErrorIndicator from '../error-indicator';
 
 export default class RandomPlanet extends Component {
 
@@ -24,6 +25,14 @@ export default class RandomPlanet extends Component {
     onPlanetLoaded = (planet) => {
         this.setState({
             planet,
+            loading: false,
+            error: false
+        });
+    };
+
+    onError = (err) => {
+        this.setState({
+            error: true,
             loading: false
         });
     };
@@ -32,24 +41,24 @@ export default class RandomPlanet extends Component {
         const id = Math.floor(Math.random() * 25) + 2;
         this.swapiService
             .getPlanet(id)
-            .then(this.onPlanetLoaded);
+            .then(this.onPlanetLoaded)
+            .catch(this.onError);
     }
 
     render() {
 
-        const { planet, loading } = this.state;
+        const { planet, loading, error } = this.state;
 
-        if (loading) {
-            return <Spinner />;
-        }
+        const hasData = !(loading || error);
 
+        const errorMessage = error ? <ErrorIndicator/> : null;
         const spinner = loading ? <Spinner /> : null;
-        const content = !loading ? <PlanetView planet={planet} /> : null;
+        const content = hasData ? <PlanetView planet={planet} /> : null;
 
         return (
 
             <div className='random-planet d-flex'>
-
+                {errorMessage}
                 {spinner}
                 {content}
 

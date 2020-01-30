@@ -1,0 +1,6 @@
+.error-indicator{
+    display: inline-grid;
+    margin: auto;
+    text-align: center;
+    color: #f7ce58;
+}
