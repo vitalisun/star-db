@@ -11,8 +11,8 @@ import './app.css';
 export default class App extends Component {
 
     state = {
-
-        showRandomPlanet: true
+        showRandomPlanet: true,
+        selectedPerson: null
     }
 
     toggleRandomPlanet = () => {
@@ -23,6 +23,12 @@ export default class App extends Component {
             }
         });    
     }
+
+    onPersonSelected = (id) => {
+        this.setState({
+            selectedPerson: id
+        });
+    };
 
     render(){
 
@@ -39,8 +45,8 @@ export default class App extends Component {
                 </button>
 
                 <div className='d-flex justify-content-between mt-4'>
-                    <ItemList />
-                    <PersonDetails />
+                    <ItemList onItemSelected={this.onPersonSelected}/>
+                    <PersonDetails personId={this.state.selectedPerson}/>
                 </div>
             </div>
     
