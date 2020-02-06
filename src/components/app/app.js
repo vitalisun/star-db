@@ -7,12 +7,15 @@ import RandomPlanet from '../random-planet';
 import PersonDetails from '../person-details';
 
 import './app.css';
+import ErrorButton from '../error-button';
+import ErrorIndicator from '../error-indicator';
 
 export default class App extends Component {
 
     state = {
         showRandomPlanet: true,
-        selectedPerson: 5
+        selectedPerson: 5,
+        hasError: false
     }
 
     toggleRandomPlanet = () => {
@@ -30,7 +33,16 @@ export default class App extends Component {
         });
     };
 
+    componentDidCatch(){
+        console.log('componentDidCatch()');
+        this.setState({hasError:true})
+    }
+
     render(){
+
+        if(this.state.hasError){
+            return <ErrorIndicator />
+        }
 
         const planet = this.state.showRandomPlanet ? <RandomPlanet/> : null;
 
@@ -43,6 +55,7 @@ export default class App extends Component {
                 <button className='btn btn-warning' onClick={this.toggleRandomPlanet}>
                     Toggle Random Planet
                 </button>
+                <ErrorButton />
 
                 <div className='d-flex justify-content-between mt-4'>
                     <ItemList onItemSelected={this.onPersonSelected}/>

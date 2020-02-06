@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 
 import './error-indicator.css';
-import icon from './death-star.png'
+import icon from './death-star.png';
 
 const ErrorIndicator = () => {
 
     return (
 
         <div className="error-indicator">
-            <img scr={icon} alt='error icon'/>
+            <img scr={icon} 
+                width="100" height="100"
+                alt='error icon'/>
             <span className='boom'>
                 Boom!
             </span>
