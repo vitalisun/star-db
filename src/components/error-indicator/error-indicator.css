@@ -3,4 +3,8 @@
     margin: auto;
     text-align: center;
     color: #f7ce58;
+
+    background-color: #383633;
+    border-radius: 5px;
+    padding: 10px;
 }

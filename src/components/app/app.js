@@ -9,12 +9,12 @@ import PersonDetails from '../person-details';
 import './app.css';
 import ErrorButton from '../error-button';
 import ErrorIndicator from '../error-indicator';
+import PeoplePage from '../people-page/people-page';
 
 export default class App extends Component {
 
     state = {
         showRandomPlanet: true,
-        selectedPerson: 5,
         hasError: false
     }
 
@@ -26,12 +26,6 @@ export default class App extends Component {
             }
         });    
     }
-
-    onPersonSelected = (id) => {
-        this.setState({
-            selectedPerson: id
-        });
-    };
 
     componentDidCatch(){
         console.log('componentDidCatch()');
@@ -56,11 +50,10 @@ export default class App extends Component {
                     Toggle Random Planet
                 </button>
                 <ErrorButton />
+                <PeoplePage />
+                <PeoplePage />
+                <PeoplePage />
 
-                <div className='d-flex justify-content-between mt-4'>
-                    <ItemList onItemSelected={this.onPersonSelected}/>
-                    <PersonDetails personId={this.state.selectedPerson}/>
-                </div>
             </div>
     
     

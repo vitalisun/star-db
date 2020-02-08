@@ -5,6 +5,7 @@ import './person-details.css';
 import randomPlanetImg from '../../paris.jpg';
 import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
+import ErrorButton from '../error-button';
 
 export default class PersonDetails extends Component {
 
@@ -62,6 +63,7 @@ export default class PersonDetails extends Component {
             <div className='person-details row'>
                 {spinner}
                 {content}
+                
             </div>
         );
     }
@@ -98,6 +100,7 @@ const PersonView = ({ person }) => {
                         <span className='term'>Eye Color</span>
                         <span> {eyeColor}</span>
                     </li>
+                    <ErrorButton />
                 </ul>
             </div>
         </React.Fragment>
