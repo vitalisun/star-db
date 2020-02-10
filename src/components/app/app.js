@@ -10,8 +10,11 @@ import './app.css';
 import ErrorButton from '../error-button';
 import ErrorIndicator from '../error-indicator';
 import PeoplePage from '../people-page/people-page';
+import SwapiService from '../../services/swapi-service';
 
 export default class App extends Component {
+
+    swapiService = new SwapiService();
 
     state = {
         showRandomPlanet: true,
@@ -40,6 +43,7 @@ export default class App extends Component {
 
         const planet = this.state.showRandomPlanet ? <RandomPlanet/> : null;
 
+
         return (
             <div className='container'>
                 <Header />
@@ -51,9 +55,20 @@ export default class App extends Component {
                 </button>
                 <ErrorButton />
                 <PeoplePage />
-                <PeoplePage />
-                <PeoplePage />
 
+                <div className=
+                    'd-flex justify-content-between mt-4'>
+                    <ItemList onItemSelected={this.onPersonSelected}
+                            getData = {this.swapiService.getAllPlanets} />
+                    <PersonDetails personId={this.state.selectedPerson}/>
+                </div>
+
+                <div className=
+                    'd-flex justify-content-between mt-4'>
+                    <ItemList onItemSelected={this.onPersonSelected}
+                            getData = {this.swapiService.getAllStarships} />
+                    <PersonDetails personId={this.state.selectedPerson}/>
+                </div>
             </div>
     
     
