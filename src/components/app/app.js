@@ -59,14 +59,17 @@ export default class App extends Component {
                 <div className=
                     'd-flex justify-content-between mt-4'>
                     <ItemList onItemSelected={this.onPersonSelected}
-                            getData = {this.swapiService.getAllPlanets} />
+                            getData = {this.swapiService.getAllPlanets} 
+                            renderItem={(item)=>
+                            (<span>{item.name} <button>!</button></span>)}/>
                     <PersonDetails personId={this.state.selectedPerson}/>
                 </div>
 
                 <div className=
                     'd-flex justify-content-between mt-4'>
                     <ItemList onItemSelected={this.onPersonSelected}
-                            getData = {this.swapiService.getAllStarships} />
+                            getData = {this.swapiService.getAllStarships} 
+                            renderItem={(item)=>item.name}/>
                     <PersonDetails personId={this.state.selectedPerson}/>
                 </div>
             </div>

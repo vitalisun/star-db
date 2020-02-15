@@ -38,7 +38,10 @@ export default class PeoplePage extends Component{
             <ErrorIndicator /> :
             <React.Fragment>
                 <ItemList onItemSelected={this.onPersonSelected}
-                            getData={this.swapiService.getAllPeople}/>
+                            getData={this.swapiService.getAllPeople}
+                            renderItem={({name, gender, birthYear})=>
+                                    `${name} (${gender}, ${birthYear})} `}/>
+                            
                 <PersonDetails personId={this.state.selectedPerson}/>
             </React.Fragment>
 
@@ -46,7 +49,7 @@ export default class PeoplePage extends Component{
             <div className='d-flex justify-content-between mt-4'>
 
                { view }
-  
+  =
             </div>
         );
     }
