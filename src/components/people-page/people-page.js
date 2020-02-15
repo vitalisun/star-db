@@ -7,6 +7,16 @@ import PersonDetails from '../person-details';
 import ErrorIndicator from '../error-indicator';
 import SwapiService from '../../services/swapi-service';
 
+
+const Row = ({left, right}) => {
+    return(
+        <div className='d-flex justify-content-between mt-4'>
+            { left }
+            { right }
+        </div>        
+    );
+};
+
 export default class PeoplePage extends Component{
 
     swapiService = new SwapiService();
@@ -32,25 +42,26 @@ export default class PeoplePage extends Component{
         })
     }
 
+
     render(){
+
+        const itemList = (
+            <ItemList onItemSelected={this.onPersonSelected}
+                        getData={this.swapiService.getAllPeople}
+                        renderItem={({name, gender, birthYear})=>
+                                `${name} (${gender}, ${birthYear})} `}/>
+        );
+
+        const personDetails = (
+            <PersonDetails personId={this.state.selectedPerson}/>
+        );
 
         const view = this.state.hasError ? 
             <ErrorIndicator /> :
-            <React.Fragment>
-                <ItemList onItemSelected={this.onPersonSelected}
-                            getData={this.swapiService.getAllPeople}
-                            renderItem={({name, gender, birthYear})=>
-                                    `${name} (${gender}, ${birthYear})} `}/>
-                            
-                <PersonDetails personId={this.state.selectedPerson}/>
-            </React.Fragment>
+            <Row left={itemList} right={personDetails}/>
 
         return (
-            <div className='d-flex justify-content-between mt-4'>
-
-               { view }
-  =
-            </div>
+            <Row left={itemList} right={personDetails}/>
         );
     }
 }
