@@ -6,6 +6,7 @@ import ItemList from '../item-list';
 import PersonDetails from '../person-details';
 import ErrorIndicator from '../error-indicator';
 import SwapiService from '../../services/swapi-service';
+import ErrorButton from '../error-button';
 
 
 const Row = ({left, right}) => {
@@ -16,6 +17,27 @@ const Row = ({left, right}) => {
         </div>        
     );
 };
+
+class ErrorBoundry extends Component{
+
+    state = {
+        hasError: false
+    };
+
+    componentDidCatch(error, info){
+        this.setState({
+            hasError: true
+        })
+    }
+
+    render(){
+        if(this.state.hasError){
+            return <ErrorIndicator />
+        }
+        return this.props.children;
+    }
+}
+
 
 export default class PeoplePage extends Component{
 
@@ -32,17 +54,6 @@ export default class PeoplePage extends Component{
         });
     };
 
-
-    componentDidCatch(error, info){
-
-        debugger;
-
-        this.setState({
-            hasError: true
-        })
-    }
-
-
     render(){
 
         const itemList = (
@@ -56,12 +67,10 @@ export default class PeoplePage extends Component{
             <PersonDetails personId={this.state.selectedPerson}/>
         );
 
-        const view = this.state.hasError ? 
-            <ErrorIndicator /> :
-            <Row left={itemList} right={personDetails}/>
-
         return (
-            <Row left={itemList} right={personDetails}/>
+            <ErrorBoundry >
+                <Row left={itemList} right={personDetails}/>
+            </ErrorBoundry>
         );
     }
 }
