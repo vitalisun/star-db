@@ -3,40 +3,13 @@ import ReactDom from 'react-dom';
 
 import './people-page.css';
 import ItemList from '../item-list';
-import PersonDetails from '../person-details';
-import ErrorIndicator from '../error-indicator';
+import ItemDetails from '../item-details';
 import SwapiService from '../../services/swapi-service';
-import ErrorButton from '../error-button';
+import Row from '../row';
+import ErrorBoundry from '../error-boundry';
 
 
-const Row = ({left, right}) => {
-    return(
-        <div className='d-flex justify-content-between mt-4'>
-            { left }
-            { right }
-        </div>        
-    );
-};
 
-class ErrorBoundry extends Component{
-
-    state = {
-        hasError: false
-    };
-
-    componentDidCatch(error, info){
-        this.setState({
-            hasError: true
-        })
-    }
-
-    render(){
-        if(this.state.hasError){
-            return <ErrorIndicator />
-        }
-        return this.props.children;
-    }
-}
 
 
 export default class PeoplePage extends Component{
@@ -64,7 +37,7 @@ export default class PeoplePage extends Component{
         );
 
         const personDetails = (
-            <PersonDetails personId={this.state.selectedPerson}/>
+            <ItemDetails personId={this.state.selectedPerson}/>
         );
 
         return (

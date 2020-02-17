@@ -4,13 +4,15 @@ import ReactDom from 'react-dom';
 import Header from '../header';
 import ItemList from '../item-list';
 import RandomPlanet from '../random-planet';
-import PersonDetails from '../person-details';
+import ItemDetails from '../item-details';
 
 import './app.css';
 import ErrorButton from '../error-button';
 import ErrorIndicator from '../error-indicator';
 import PeoplePage from '../people-page/people-page';
 import SwapiService from '../../services/swapi-service';
+import ErrorBoundry from '../error-boundry';
+import Row from '../row';
 
 export default class App extends Component {
 
@@ -43,36 +45,40 @@ export default class App extends Component {
 
         const planet = this.state.showRandomPlanet ? <RandomPlanet/> : null;
 
+        const { 
+            getPerson, 
+            getStarship,
+            getPersonImage,
+            getStarshipImage } = this.swapiService;
+
+        const personDetails = (
+            <ItemDetails 
+            itemId={11}
+            getData={getPerson}
+            getImageUrl={getPersonImage} />
+        );
+        const starshipDetails = (
+            <ItemDetails 
+            itemId={5}
+            getData={getStarship}
+            getImageUrl={getStarshipImage}  />
+        );
 
         return (
-            <div className='container'>
-                <Header />
+
+            <ErrorBoundry>
+                <div className='stardb-app container'>
+                    <Header />
                 
-                { planet }
+                <Row 
+                    left={personDetails}
+                    right={starshipDetails} />
 
-                <button className='btn btn-warning' onClick={this.toggleRandomPlanet}>
-                    Toggle Random Planet
-                </button>
-                <ErrorButton />
-                <PeoplePage />
-
-                <div className=
-                    'd-flex justify-content-between mt-4'>
-                    <ItemList onItemSelected={this.onPersonSelected}
-                            getData = {this.swapiService.getAllPlanets} 
-                            renderItem={(item)=>
-                            (<span>{item.name} <button>!</button></span>)}/>
-                    <PersonDetails personId={this.state.selectedPerson}/>
+                
                 </div>
+            </ErrorBoundry>
 
-                <div className=
-                    'd-flex justify-content-between mt-4'>
-                    <ItemList onItemSelected={this.onPersonSelected}
-                            getData = {this.swapiService.getAllStarships} 
-                            renderItem={(item)=>item.name}/>
-                    <PersonDetails personId={this.state.selectedPerson}/>
-                </div>
-            </div>
+
     
     
         );
